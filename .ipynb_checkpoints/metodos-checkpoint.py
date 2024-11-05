@@ -37,6 +37,25 @@ def subs_reg(A):
 
     return x
 
+import numpy as np
+
+def lu(A):
+
+    n = len(A)
+    L = np.eye(n,n)
+    
+    for k in range(0,n-1):
+
+        if A[k,k] == 0:
+                return [],[]
+        
+        for i in range(k+1,n):
+                    
+            L[i,k] = A[i,k] / A[k,k]
+            A[i,:] = A[i,:] - L[i,k] * A[k,:]
+    
+    return L, A 
+
 def palu(A): # PA = LU
     
     n = len(A)
