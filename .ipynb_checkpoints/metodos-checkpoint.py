@@ -37,7 +37,7 @@ def subs_reg(A):
 
     return x
 
-def palu(A):
+def palu(A): # PA = LU
     
     n = len(A)
     P = np.eye(n)
@@ -62,3 +62,16 @@ def palu(A):
 
     return P, L, U
 
+def gaxpy_cholesky(A): # A = GGt
+
+    n = len(A)
+    
+    for j in range(0,n):
+        
+        if j > 0:
+
+            A[j:n,j] = A[j:n,j] - A[j:n,0:j] @ A[j,0:j].T
+        
+        A[j:n,j] = A[j:n,j] / np.sqrt(A[j,j])
+        
+    return np.tril(A)
